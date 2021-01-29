@@ -19,5 +19,11 @@ dp = Dispatcher(bot, loop=loop, storage=MemoryStorage())
 dp.middleware.setup(LoggingMiddleware())
 
 
+@dp.message_handler(commands=['start'])
+async def start_command_handler(message: types.Message):
+    """Handle start command"""
+    await bot.send_message(message.from_user.id, "Hi, user!")
+
+
 if __name__ == '__main__':
     executor.start_polling(dp)
