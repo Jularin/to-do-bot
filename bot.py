@@ -25,5 +25,11 @@ async def start_command_handler(message: types.Message):
     await bot.send_message(message.from_user.id, "Hi, user!")
 
 
+@dp.message_handler
+async def message_handling(message: types.Message):
+    """Echo all messages"""
+    await bot.send_message(message.from_user.id, message.text)
+
+
 if __name__ == '__main__':
     executor.start_polling(dp)
