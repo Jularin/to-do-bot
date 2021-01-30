@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aa25bfd-c3b3-4740-8d33-7c0cad0a48a2" name="Default Changelist" comment="create database">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ea5b750e-682d-47e1-a01b-88962326a7cd.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/to-do-bot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mydatabase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <list id="f2576cda-0304-44f0-ad17-5c5e6add8987" name="Changes by bushmester" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +153,7 @@
       <workItem from="1611944253165" duration="7000" />
       <workItem from="1611944273802" duration="1240000" />
       <workItem from="1612001867289" duration="3742000" />
-      <workItem from="1612005671888" duration="4073000" />
+      <workItem from="1612005671888" duration="4498000" />
     </task>
     <task id="LOCAL-00001" summary="create database">
       <created>1612009731842</created>
