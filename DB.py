@@ -14,3 +14,4 @@ def creat_table():
     deadline TEXT);
     ''')
 
+# creat_table()

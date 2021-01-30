@@ -55,12 +55,23 @@ class DeleteTask(CreateTask):
     delete task from db
     '''
 
+    def __init__(self, t_id: int, name_task: str, description=None, deadline=None):
+        super().__init__(t_id, name_task, description=None, deadline=None)
+
+    def delete(self, name_task: str):
+        lst = 'l_' + str(self.t_id)
+        # TODO: исправить ошибку
+        cur.execute(f"DELETE FROM {lst} WHERE name_task ={name_task}")
+        con.commit()
+
 
 def main():
-    test = CreateTask(42, 'Create project', 'yes', '6.2.2021')
-    test.save()
-    d = EditTask
-    d.edit_task(test)
+    test = CreateTask(42, 'kjhukhk', 'kji', 'ugiughikl')
+    # test.save()
+    dele = DeleteTask
+    dele.delete(test, 'kjhukhk')
+    # d = EditTask
+    # d.edit_task(test)
 
 
 if __name__ == "__main__":
