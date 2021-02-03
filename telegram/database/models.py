@@ -17,7 +17,7 @@ class User(Base):
 class TaskToUser(Base):
     __tablename__ = "task_to_user"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
-    user_id = Column(Integer, nullable=False)
+    user_id = Column(String, nullable=False)
     task_category = Column(Text, default=None)
     status = Column(Boolean, default=True)  # True - active task, False inactive
 
@@ -25,20 +25,21 @@ class TaskToUser(Base):
 class Task(Base):
     __tablename__ = "tasks"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
-    user_id = Column(String, ForeignKey('users.user_id'))
+    user_id = Column(String, nullable=False)
     task_name = Column(String, nullable=False)
     task_description = Column(Text, default=None)
     deadline = Column(DateTime, default=None)
 
 
 class Subscription(Base):
-    __tablename__ = 'subscriprions'
+    __tablename__ = 'subscriptions'
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
-    user_id = Column(String, ForeignKey('users.user_id'))
+    user_id = Column(String, nullable=False)
     group = Column(Text)
 
 
 class GroupToTask(Base):
+    __tablename__ = "group_to_task"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
     group_id = Column(Integer, nullable=False)
     task_id = Column(Integer, nullable=False)
@@ -47,9 +48,9 @@ class GroupToTask(Base):
 class Groups(Base):
     __tablename__ = 'groups'
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
-    group_name = Column(String)
-    group_password = Column(String)
-    group_admin = Column(String)
+    admin = Column(String, nullable=False)
+    name = Column(String)
+    password = Column(String)
 
 
 if __name__ == '__main__':
