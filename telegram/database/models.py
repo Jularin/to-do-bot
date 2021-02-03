@@ -19,13 +19,9 @@ class Task(Base):
     __tablename__ = "tasks"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
     user_id = Column(String, ForeignKey('users.user_id'))
-    # user = relationship("User")
     task_name = Column(String, nullable=False)
     task_description = Column(Text, default=None)
-    category = Column(Text, default=None)
     deadline = Column(DateTime, default=None)
-    status = Column(Boolean)  # True - active task, False inactive
-    group = Column(Text, default=None)
 
 
 class Subscriprion(Base):
