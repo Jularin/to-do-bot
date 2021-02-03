@@ -1,1 +1,1 @@
-from . import menu_keybord
+from . import menu_keybord, personal_action_keyboard
