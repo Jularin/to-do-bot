@@ -12,20 +12,35 @@ class User(Base):
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
     user_id = Column(String, nullable=False, unique=True)
     username = Column(String, nullable=True)
-    tasks = relationship("UserTasks", )
+    # tasks = relationship("UserTasks", )
 
 
 class Task(Base):
     __tablename__ = "tasks"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
     user_id = Column(String, ForeignKey('users.user_id'))
-    user = relationship("User")
+    # user = relationship("User")
     task_name = Column(String, nullable=False)
-    task_description = Column(Text)
-    group = Column(Text)
-    deadline = Column(DateTime)
+    task_description = Column(Text, default=None)
+    category = Column(Text, default=None)
+    deadline = Column(DateTime, default=None)
     status = Column(Boolean)  # True - active task, False inactive
+    group = Column(Text, default=None)
 
+
+class Subscriprion(Base):
+    __tablename__ = 'subscriprion'
+    id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
+    user_id = Column(String, ForeignKey('users.user_id'))
+    group = Column(Text)
+
+
+class Groups(Base):
+    __tablename__ = 'groups'
+    id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
+    group_name = Column(String)
+    group_password = Column(String)
+    group_admin = Column(String)
 
 
 if __name__ == '__main__':
@@ -35,6 +50,3 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
     Session.configure(bind=engine)
     session = Session()
-
-
-
