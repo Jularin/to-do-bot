@@ -6,6 +6,7 @@ from aiogram.dispatcher.filters import Command
 from keyboards.inline.callback_data import menu_cd
 from keyboards.inline.menu_keybord import todo_categories_keybord
 from keyboards.inline.personal_action_keyboard import personal_action_keybord
+from keyboards.inline.group_action_keyboard import group_action_keybord
 from loader import dp
 
 
@@ -31,16 +32,24 @@ async def personal_action(callback: types.CallbackQuery):
     await callback.message.edit_reply_markup(markup)
 
 
+async def group_action(callback: types.CallbackQuery):
+    markup = await group_action_keybord()
+    await callback.message.edit_reply_markup(markup)
+
+
 @dp.callback_query_handler(menu_cd.filter())
-async def navigate(call: types.CallbackQuery, callback_data: dict):
+async def personal_navigate(call: types.CallbackQuery, callback_data: dict):
 
     '''Navigate through levels'''
 
     current_level = callback_data.get('level')
+    category = callback_data.get('category')
+
+    action = personal_action if category == 'personal' else group_action
 
     levels = {
         '0': todo_categories,
-        '1': personal_action
+        '1': action
     }
 
     current_level_function = levels[current_level]
