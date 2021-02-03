@@ -12,7 +12,14 @@ class User(Base):
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
     user_id = Column(String, nullable=False, unique=True)
     username = Column(String, nullable=True)
-    # tasks = relationship("UserTasks", )
+
+
+class TaskToUser(Base):
+    __tablename__ = "task_to_user"
+    id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
+    user_id = Column(Integer, nullable=False)
+    task_category = Column(Text, default=None)
+    status = Column(Boolean, default=True)  # True - active task, False inactive
 
 
 class Task(Base):
@@ -24,11 +31,17 @@ class Task(Base):
     deadline = Column(DateTime, default=None)
 
 
-class Subscriprion(Base):
-    __tablename__ = 'subscriprion'
+class Subscription(Base):
+    __tablename__ = 'subscriprions'
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
     user_id = Column(String, ForeignKey('users.user_id'))
     group = Column(Text)
+
+
+class GroupToTask(Base):
+    id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
+    group_id = Column(Integer, nullable=False)
+    task_id = Column(Integer, nullable=False)
 
 
 class Groups(Base):
