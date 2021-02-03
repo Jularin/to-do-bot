@@ -29,3 +29,20 @@ async def todo_categories(message: Union[types.Message, types.CallbackQuery], **
 async def personal_action(callback: types.CallbackQuery):
     markup = await personal_action_keybord()
     await callback.message.edit_reply_markup(markup)
+
+
+@dp.callback_query_handler(menu_cd.filter())
+async def navigate(call: types.CallbackQuery, callback_data: dict):
+
+    '''Navigate through levels'''
+
+    current_level = callback_data.get('level')
+
+    levels = {
+        '0': todo_categories,
+        '1': personal_action
+    }
+
+    current_level_function = levels[current_level]
+
+    await current_level_function(call)
