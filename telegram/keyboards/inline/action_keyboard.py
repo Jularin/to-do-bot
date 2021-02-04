@@ -11,7 +11,7 @@ async def taskmake_subaction_keybord():
     markup = InlineKeyboardMarkup()
 
     skip_callback_data = make_callback_data(
-        level=CURRNET_LEVEL + 1, action='taskmake', subaction='skip')
+        level=CURRNET_LEVEL + 1, action='make', subaction='skip')
     skip = InlineKeyboardButton(
         text='Skip', callback_data=skip_callback_data
     )
@@ -32,16 +32,16 @@ async def tasklist_subaction_keybord():
     markup = InlineKeyboardMarkup()
 
     alltask_callback_data = make_callback_data(
-        level=CURRNET_LEVEL + 1, action='tasklist', subaction='all')
+        level=CURRNET_LEVEL + 1, action='list', subaction='all')
     alltask = InlineKeyboardButton(
         text='All task', callback_data=alltask_callback_data
     )
     markup.insert(alltask)
 
     category_callback_data = make_callback_data(
-        level=CURRNET_LEVEL + 1, action='tasklist', subaction='category')
+        level=CURRNET_LEVEL + 1, action='list', subaction='category')
     category = InlineKeyboardButton(
-        text='All task', callback_data=category_callback_data
+        text='Category task', callback_data=category_callback_data
     )
     markup.insert(category)
 

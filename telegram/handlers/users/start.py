@@ -47,7 +47,7 @@ async def navigate(call: types.CallbackQuery, callback_data: dict):
     subaction = callback_data.get('subaction')
     delete = callback_data.get('delete')
 
-    first_level = taskmake_subaction if action == 'taskmake' else tasklist_subaction
+    first_level = taskmake_subaction if action == 'make' else tasklist_subaction
 
     levels = {
         '0': todo_categories,

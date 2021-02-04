@@ -11,14 +11,14 @@ async def todo_action_keybord():
     markup = InlineKeyboardMarkup()
 
     task_make_callback_data = make_callback_data(
-        level=CURRNET_LEVEL + 1, action='taskmake')
+        level=CURRNET_LEVEL + 1, action='make')
     task_make = InlineKeyboardButton(
         text='Make task', callback_data=task_make_callback_data
     )
     markup.insert(task_make)
 
     task_list_callback_data = make_callback_data(
-        level=CURRNET_LEVEL + 1, action='tasklist'
+        level=CURRNET_LEVEL + 1, action='list'
     )
     task_list = InlineKeyboardButton(
         text='List task', callback_data=task_list_callback_data
