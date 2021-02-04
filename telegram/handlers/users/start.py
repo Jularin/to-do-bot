@@ -7,6 +7,7 @@ from keyboards.inline.callback_data import menu_cd
 from keyboards.inline.menu_keybord import todo_categories_keybord
 from keyboards.inline.personal_action_keyboard import personal_action_keybord
 from keyboards.inline.group_action_keyboard import group_action_keybord
+from keyboards.inline.personal_subaction_keyboard import personal_taskmake_subaction_keybord, personal_tasklist_subaction_keybord
 from loader import dp
 
 
@@ -37,21 +38,37 @@ async def group_action(callback: types.CallbackQuery):
     await callback.message.edit_reply_markup(markup)
 
 
+async def personal_taskmake_subaction(callback: types.CallbackQuery):
+    markup = await personal_taskmake_subaction_keybord()
+    await callback.message.edit_reply_markup(markup)
+
+
+async def personal_tasklist_subaction(callback: types.CallbackQuery):
+    markup = await personal_tasklist_subaction_keybord()
+    await callback.message.edit_reply_markup(markup)
+
+
 @dp.callback_query_handler(menu_cd.filter())
-async def personal_navigate(call: types.CallbackQuery, callback_data: dict):
+async def navigate(call: types.CallbackQuery, callback_data: dict):
 
     '''Navigate through levels'''
 
     current_level = callback_data.get('level')
     category = callback_data.get('category')
+    action = callback_data.get('action')
+    subaction = callback_data.get('subaction')
+    delete = callback_data.get('delete')
 
-    action = personal_action if category == 'personal' else group_action
+    first_level = personal_action if category == 'personal' else group_action
+    second_level = personal_taskmake_subaction if action == 'taskmake' else personal_tasklist_subaction
 
     levels = {
         '0': todo_categories,
-        '1': action
+        '1': first_level,
+        '2': second_level
     }
 
     current_level_function = levels[current_level]
 
+    print(call['data'])
     await current_level_function(call)
