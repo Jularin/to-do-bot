@@ -4,9 +4,8 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 
 from keyboards.inline.callback_data import menu_cd
-from keyboards.inline.menu_keybord import todo_categories_keybord
-from keyboards.inline.personal_action_keyboard import personal_action_keybord
-from keyboards.inline.personal_subaction_keyboard import personal_taskmake_subaction_keybord, personal_tasklist_subaction_keybord
+from keyboards.inline.menu_keybord import todo_action_keybord
+from keyboards.inline.action_keyboard import taskmake_subaction_keybord, tasklist_subaction_keybord
 from loader import dp
 
 
@@ -18,7 +17,7 @@ async def start(message: types.Message):
 
 
 async def todo_categories(message: Union[types.Message, types.CallbackQuery], **kwargs):
-    markup = await todo_categories_keybord()
+    markup = await todo_action_keybord()
 
     if isinstance(message, types.Message):
         await message.answer(text=f'Hi, {message.from_user.full_name}!', reply_markup=markup)
@@ -27,18 +26,13 @@ async def todo_categories(message: Union[types.Message, types.CallbackQuery], **
         await message.message.edit_reply_markup(markup)
 
 
-async def personal_action(callback: types.CallbackQuery):
-    markup = await personal_action_keybord()
+async def taskmake_subaction(callback: types.CallbackQuery):
+    markup = await taskmake_subaction_keybord()
     await callback.message.edit_reply_markup(markup)
 
 
-async def personal_taskmake_subaction(callback: types.CallbackQuery):
-    markup = await personal_taskmake_subaction_keybord()
-    await callback.message.edit_reply_markup(markup)
-
-
-async def personal_tasklist_subaction(callback: types.CallbackQuery):
-    markup = await personal_tasklist_subaction_keybord()
+async def tasklist_subaction(callback: types.CallbackQuery):
+    markup = await tasklist_subaction_keybord()
     await callback.message.edit_reply_markup(markup)
 
 
@@ -53,13 +47,11 @@ async def navigate(call: types.CallbackQuery, callback_data: dict):
     subaction = callback_data.get('subaction')
     delete = callback_data.get('delete')
 
-    first_level = personal_action
-    second_level = personal_taskmake_subaction if action == 'taskmake' else personal_tasklist_subaction
+    first_level = taskmake_subaction if action == 'taskmake' else tasklist_subaction
 
     levels = {
         '0': todo_categories,
         '1': first_level,
-        '2': second_level
     }
 
     current_level_function = levels[current_level]
