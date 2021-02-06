@@ -18,6 +18,7 @@ class TaskToUser(Base):
     __tablename__ = "task_to_user"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)
     user_id = Column(String, nullable=False)
+    task_id = Column(Integer, nullable=False)
     task_category = Column(Text, default=None)
     status = Column(Boolean, default=True)  # True - active task, False inactive
 
@@ -25,7 +26,6 @@ class TaskToUser(Base):
 class Task(Base):
     __tablename__ = "tasks"
     id = Column(Integer().with_variant(Integer, 'sqlite'), primary_key=True, nullable=False)  # increment primary key
-    user_id = Column(String, nullable=False)
     task_name = Column(String, nullable=False)
     task_description = Column(Text, default=None)
     deadline = Column(DateTime, default=None)
